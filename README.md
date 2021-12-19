@@ -39,7 +39,7 @@ docker run -p 32801:32801 \
 -e STOMPER_HOSTNAME=0.0.0.0 \
 -e STOMPER_TOPICS=/channel/main \
 -e STOMPER_TCPDEADLINE=0 \
-ghcr.io/tydar/stomper:maion
+ghcr.io/tydar/stomper:main
 ```
 
 4. Run stomp-chat:
@@ -61,5 +61,6 @@ $ ./stomp-chat -h
 -uname string
 	username (default "default_guy_123")
 ```
+
 
 
