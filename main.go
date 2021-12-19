@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"flag"
 	"log"
 	"net"
 	"os"
@@ -14,14 +15,21 @@ import (
 )
 
 func main() {
-	lf, err := os.Create("chat.log")
+	logFn := flag.String("log", "chat.log", "filename for logging; destructively created each run")
+	uname := flag.String("uname", "default_guy_123", "username")
+	host := flag.String("host", "localhost", "hostname of stomp server")
+	port := flag.Int("port", 32801, "port number for stomp server")
+
+	flag.Parse()
+
+	lf, err := os.Create(*logFn)
 	if err != nil {
 		panic(err)
 	}
 
 	log.SetOutput(lf)
 
-	c := NewClient("main", "tyler", "localhost", 32801)
+	c := NewClient("main", *uname, *host, *port)
 	c.Start()
 }
 
