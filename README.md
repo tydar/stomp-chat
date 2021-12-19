@@ -1,26 +1,16 @@
 # STOMP Chat
 
-Chat client to operate through a STOMP pub/sub server.
+Chat client to operate through a STOMP pub/sub server. Designed to demonstrate my project [stomper](github.com/tydar/stomper).
 
-Operation:
-- Message frames look like this:
-    ```
-    MESSAGE
-    destination:/channel/main
-    username:imamod
+Todo to finish:
 
-    this is a chat message on the channel main
-    ```
-That's it, it's that simple.
+1) Allow runtime configuration of hostname and port
+2) Allow runtime configuration of username
 
-Prompt:
-```
-username : #channel>
-```
+Might do for fun:
 
-Switch channel:
-```
-username : #channel>/chan other-channel
-```
+1) Support multiple channels
+2) Support DMs
+	* Have a pub/sub channel per DM that is created with a dynamic UUID to avoid snooping ?
 
-This creates that channel if it does not exist.
+Not really planning to write a dedicated chat server, so options are limited feature-wise.
