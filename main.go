@@ -49,6 +49,20 @@ func NewClient(initial, username, host string, port int) *client {
 	if err != nil {
 		panic(err)
 	}
+
+	connh := map[string]string{"accept-version": "1.2"}
+	connFr := Frame{
+		Command: CONNECT,
+		Headers: connh,
+		Body:    "",
+	}
+
+	connFrS := UnmarshalFrame(connFr)
+	_, err = conn.Write([]byte(connFrS))
+	if err != nil {
+		panic(err)
+	}
+
 	return &client{
 		username: username,
 		view:     tview.NewTextView().SetText("Lorem ipsum"),
@@ -160,6 +174,8 @@ func (c *client) Read() {
 			}
 			if fr.Command == MESSAGE {
 				c.updates <- fr.Body
+			} else if fr.Command == CONNECTED {
+				log.Println("received connected frame")
 			}
 		}
 	}
